@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
@@ -7,22 +8,99 @@
     <title>My Website</title>
     <link href="/styles/main.css" rel="stylesheet" />
   </head>
+  
   <body>
+  
     <header role="banner">
-      <h1>Welcome to my Website!</h1>
-    </header>
-    <main>
-      <p>This is a paragraph.</p>
-      <a href="/elements.html">Elements Page</a>
 
-      <div class="counter">
-        <h2>Counter</h2>
-        <button id="increment" class="counter-button">+</button>
-        <button id="decrement" class="counter-button">−</button>
-        <span id="count">0</span>
+      <h1>Welcome to my Website!</h1>
+      <h4 style="font-weight: bold;">
+        Hey There, I'm Dan Sever
+      </h4>
+      <h4>
+        This is my first website for Product Jam Course @ HUJI & Bezalel.
+      </h4>
+      <br/>
+
+    </header>
+
+    <main>
+
+      <section class="about-me">
+        <div class="info">
+            <p style = "margin-top: 0rem;
+                        font-weight: bold;
+                        font-size: 130%;">
+              Here's a little bit about myself:</p>
+            <p><strong>Name:</strong> Dan Sever</p>
+            <p><strong>Date of Birth:</strong> March 30th, 1996</p>
+            <p><strong>Country of Birth:</strong> USA</p>
+            <p><strong>Education:</strong> Computer Science & MATAR @ HUJI</p>
+            <p><strong>Hobbies:</strong> Hiking and Traveling, Sports, Reading</p>
+        </div>
+        
+        <div  class="image-container" 
+              id="imageContainer" 
+              title="Hover over to see a different expression!">
+          <img src="/public/dan-serious.jpg" 
+               alt="Serious Headshot of Dan Sever"
+               class="headshot" 
+               id="headshotImage">
+        </div>
+  
+        <script>
+          const imageContainer = document.getElementById('imageContainer');
+          const headshotImage = document.getElementById('headshotImage');
+  
+          const seriousHeadshot = '/public/dan-serious.jpg';
+          const smilingHeadshot = '/public/dan-smiling.jpg';
+  
+          imageContainer.addEventListener('mouseenter', () => {
+              headshotImage.src = smilingHeadshot; // Change to smiling headshot on hover
+          });
+  
+          imageContainer.addEventListener('mouseleave', () => {
+              headshotImage.src = seriousHeadshot; // Change back to serious headshot when not hovering
+          });
+        </script>
+      </section>
+      
+      <br>
+
+      <div class="button-container">
+        <a  href="jlm-photos.html" 
+            class="button-link">
+            Check out my favorite photos from Jerusalem!
+        </a>
+      </div>
+    
+      <br>
+
+      <h4>Feel free to reach out on any platform</h4>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/dan-sever-0454611b9/" target="_blank" rel="noopener noreferrer">
+          <img class="social-media-button" src="/public/linkedin.png" alt="LinkedIn Logo">
+        </a>
+        <a href="https://www.instagram.com/dansever/" target="_blank" rel="noopener noreferrer">
+          <img class="social-media-button" src="/public/instagram.png" alt="Instagram Logo">
+        </a>
+        <a href="https://www.facebook.com/dansever96/" target="_blank" rel="noopener noreferrer">
+          <img class="social-media-button" src="/public/facebook.png" alt="Facebook Logo">
+        </a>
+        <a href="https://github.com/dansever" target="_blank" rel="noopener noreferrer">
+          <img class="social-media-button" src="/public/github.png" alt="GitHub Logo">
+        </a>
       </div>
     </main>
 
     <script type="module" src="/main.js"></script>
+
+    <br>
+    <footer class="site-footer">
+      <div class="footer-content">
+          <p>&copy; 2024 Dan Sever. All rights reserved.</p>
+      </div>
+  </footer>
+  
   </body>
 </html>

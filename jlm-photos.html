@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Photos from Jerusalem</title>
+    <link href="/styles/main.css" rel="stylesheet" />
+
+    <style>
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid layout */
+            gap: 10px; /* Space between photos */
+        }
+        .photo-gallery img {
+            width: 100%; /* Make images responsive */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Optional: rounded corners */
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            /* font-weight: regula; */
+            color: white;
+            background-color: #0073e6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" 
+    onclick="goBack()">⬅ Back</button>
+
+
+    <h2>My Favorite Photos from Jerusalem</h2>
+    <div class="photo-gallery">
+        <img src="\public\JLM\img1.jpg" alt="Description of Photo 1">
+        <img src="\public\JLM\img2.jpg" alt="Description of Photo 2">
+        <img src="\public\JLM\img3.jpg" alt="Description of Photo 3">
+        <img src="\public\JLM\img4.jpg" alt="Description of Photo 4">
+        <img src="\public\JLM\img5.jpg" alt="Description of Photo 5">
+        <img src="\public\JLM\img6.jpg" alt="Description of Photo 6">
+        <img src="\public\JLM\img7.jpg" alt="Description of Photo 7">
+        <img src="\public\JLM\img8.jpg" alt="Description of Photo 8">
+        <img src="\public\JLM\img9.jpg" alt="Description of Photo 9">
+        <img src="\public\JLM\img10.jpg" alt="Description of Photo 10">
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back(); // Navigates back to the previous page
+        }
+    </script>
+</body>
+</html>
