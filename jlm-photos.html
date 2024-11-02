@@ -8,16 +8,15 @@
     <link href="/styles/main.css" rel="stylesheet" />
 
     <style>
-        
         .photo-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid layout */
-            gap: 10px; /* Space between photos */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
         }
         .photo-gallery img {
-            width: 100%; /* Make images responsive */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 8px; /* Optional: rounded corners */
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
 
         .back-button {
@@ -25,7 +24,6 @@
             margin-bottom: 20px;
             padding: 10px 20px;
             font-size: 16px;
-            /* font-weight: regula; */
             color: white;
             background-color: #0073e6;
             border: none;
@@ -40,30 +38,41 @@
         }
     </style>
 </head>
+
 <body>
 
-    <button class="back-button" 
-    onclick="goBack()">⬅ Back</button>
-
+    <button class="back-button" onclick="goBack()">⬅ Back</button>
 
     <h2>My Favorite Photos from Jerusalem</h2>
-    <div class="photo-gallery">
-        <img src="/public/JLM/img1.jpg" alt="Description of Photo 1">
-        <img src="\public\JLM\img2.jpg" alt="Description of Photo 2">
-        <img src="\public\JLM\img3.jpg" alt="Description of Photo 3">
-        <img src="\public\JLM\img4.jpg" alt="Description of Photo 4">
-        <img src="\public\JLM\img5.jpg" alt="Description of Photo 5">
-        <img src="\public\JLM\img6.jpg" alt="Description of Photo 6">
-        <img src="\public\JLM\img7.jpg" alt="Description of Photo 7">
-        <img src="\public\JLM\img8.jpg" alt="Description of Photo 8">
-        <img src="\public\JLM\img9.jpg" alt="Description of Photo 9">
-        <img src="\public\JLM\img10.jpg" alt="Description of Photo 10">
-    </div>
+    <div class="photo-gallery" id="photoGallery"></div>
 
     <script>
         function goBack() {
-            window.history.back(); // Navigates back to the previous page
+            window.history.back();
         }
+
+        // Array of image paths and alt texts
+        const images = [
+            { src: "/public/JLM/img1.jpg", alt: "Acquarium" },
+            { src: "/public/JLM/img2.jpg", alt: "Snow in Jan 2023" },
+            { src: "/public/JLM/img3.jpg", alt: "Malben in Migdal David" },
+            { src: "/public/JLM/img4.jpg", alt: "Snow in Monastery of The Cross" },
+            { src: "/public/JLM/img5.jpg", alt: "Sunset in Valley of The Cross" },
+            { src: "/public/JLM/img6.jpg", alt: "Monastery of The Cross" },
+            { src: "/public/JLM/img7.jpg", alt: "Yom Hazikaron at the Kotel, 2023" },
+            { src: "/public/JLM/img8.jpg", alt: "Givat Ram" },
+            { src: "/public/JLM/img9.jpg", alt: "Movie night at Tower of David" },
+            { src: "/public/JLM/img10.jpg", alt: "Yamin Moshe" },
+        ];
+
+        const gallery = document.getElementById("photoGallery");
+
+        images.forEach(image => {
+            const imgElement = document.createElement("img");
+            imgElement.src = image.src;
+            imgElement.alt = image.alt;
+            gallery.appendChild(imgElement);
+        });
     </script>
 </body>
 </html>
