@@ -18,7 +18,6 @@
             height: auto;
             border-radius: 8px;
         }
-
         .back-button {
             display: inline-block;
             margin-bottom: 20px;
@@ -48,14 +47,14 @@
 
     <script>
         function goBack() {
-            window.history.back();
+            window.location.href = 'index.html';
         }
 
         // Array of image paths and alt texts
         const images = [
-            { src: "/public/JLM/img1.png", alt: "Acquarium" },
-            { src: "/public/JLM/img2.jpg", alt: "Snow in Jan 2023" },
-            { src: "/public/JLM/img3.jpg", alt: "Malben in Migdal David" },
+            { src: "/public/img1.jpg", alt: "Acquarium" },
+            { src: "/public/JLM/img2.jpg", alt: "Snow in January 2023" },
+            { src: "/public/JLM/img3.jpg", alt: "Malben party in Migdal David" },
             { src: "/public/JLM/img4.jpg", alt: "Snow in Monastery of The Cross" },
             { src: "/public/JLM/img5.jpg", alt: "Sunset in Valley of The Cross" },
             { src: "/public/JLM/img6.jpg", alt: "Monastery of The Cross" },
