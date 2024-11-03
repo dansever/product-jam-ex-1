@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Favorite Photos from Jerusalem</title>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
     <link href="/styles/main.css" rel="stylesheet" />
 
     <style>
@@ -35,6 +36,31 @@
         .back-button:hover {
             background-color: #005bb5;
         }
+
+        .swiper-container {
+            width: 100%;
+            max-width: 450px;
+            margin: auto;
+            padding: 20px 0;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            max-width: 400px; /* Set max width for smaller images */
+            height: auto;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -43,8 +69,22 @@
     <button class="back-button" onclick="goBack()">⬅ Back</button>
 
     <h2>My Favorite Photos from Jerusalem</h2>
-    <div class="photo-gallery" id="photoGallery"></div>
 
+    <!-- Swiper carousel container -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id="photoGallery">
+            <!-- Images will be dynamically added here -->
+        </div>
+
+        <!-- Swiper navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- Swiper pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
         function goBack() {
             window.location.href = 'index.html';
@@ -67,10 +107,33 @@
         const gallery = document.getElementById("photoGallery");
 
         images.forEach(image => {
+            const slide = document.createElement("div");
+            slide.classList.add("swiper-slide");
+
             const imgElement = document.createElement("img");
             imgElement.src = image.src;
             imgElement.alt = image.alt;
-            gallery.appendChild(imgElement);
+
+            slide.appendChild(imgElement);
+            gallery.appendChild(slide);
+        });
+
+        // Initialize Swiper
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
         });
     </script>
 </body>

@@ -59,6 +59,7 @@ main {
   padding: 0.5rem; /* Adjust padding around the section */
   align-items: center;        /* Center items vertically */
   justify-content: space-between; /* Space out the info and image */
+  position: relative;
 }
 
 .info {
