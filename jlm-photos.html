@@ -5,60 +5,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Favorite Photos from Jerusalem</title>
-    <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/lightbox2/dist/css/lightbox.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/masonry-layout/4.2.2/masonry.min.css" rel="stylesheet" />
     <link href="/styles/main.css" rel="stylesheet" />
 
     <style>
         .photo-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 10px;
+            padding: 10px;
         }
+
         .photo-gallery img {
             width: 100%;
             height: auto;
             border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
+
+        .photo-gallery img:hover {
+            transform: scale(1.025);
+        }
+
         .back-button {
             display: inline-block;
             margin-bottom: 20px;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 18px;
             color: white;
             background-color: #0073e6;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
             text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
         }
 
         .back-button:hover {
             background-color: #005bb5;
+            transform: translateX(-2px); /* Slight shift to the left */
         }
 
-        .swiper-container {
-            width: 100%;
-            max-width: 450px;
-            margin: auto;
-            padding: 20px 0;
+        .back-button svg {
+            margin-right: 8px; /* Space between the icon and text */
         }
 
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .swiper-slide img {
-            width: 100%;
-            max-width: 400px; /* Set max width for smaller images */
-            height: auto;
-            border-radius: 8px;
+        .back-button:focus {
+            outline: none; /* Remove focus outline */
         }
 
         h2 {
             text-align: center;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            position: relative; /* For absolute positioning of the close button */
+        }
+
+        .modal .close {
+            color: #aaa;
+            font-size: 50px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .modal .close:hover {
+            color: black;
         }
 
     </style>
@@ -70,21 +107,28 @@
 
     <h2>My Favorite Photos from Jerusalem</h2>
 
-    <!-- Swiper carousel container -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper" id="photoGallery">
-            <!-- Images will be dynamically added here -->
-        </div>
-
-        <!-- Swiper navigation buttons -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-
-        <!-- Swiper pagination -->
-        <div class="swiper-pagination"></div>
+    <!-- Photo Gallery Grid -->
+    <div class="photo-gallery" id="gallery">
+        <!-- Images will be dynamically added here -->
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Modal Popup -->
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3><strong>Price: $19.99</strong></h3>
+            <h5>To order this photo, contact Dan:</h5>
+            <div style="display: flex; justify-content: center;">
+                <a id="whatsappLink" href="#" target="_blank">
+                    <img src="/whatsapp.png" alt="WhatsApp" style="width: 50px; height: 50px; padding: 5px">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry-layout/4.2.2/masonry.pkgd.min.js"></script>
+
     <script>
         function goBack() {
             window.location.href = 'index.html';
@@ -104,37 +148,50 @@
             { src: "/JLM/img10.jpg", alt: "Yamin Moshe" },
         ];
 
-        const gallery = document.getElementById("photoGallery");
+        const gallery = document.getElementById("gallery");
 
-        images.forEach(image => {
-            const slide = document.createElement("div");
-            slide.classList.add("swiper-slide");
-
+        // Add images to gallery
+        images.forEach((image, index) => {
             const imgElement = document.createElement("img");
             imgElement.src = image.src;
             imgElement.alt = image.alt;
+            imgElement.setAttribute("data-lightbox", "gallery");
+            imgElement.setAttribute("data-title", image.alt);
+            imgElement.onclick = function() {
+                showModal(image.alt); // Show modal when image is clicked
+            };
 
-            slide.appendChild(imgElement);
-            gallery.appendChild(slide);
+            gallery.appendChild(imgElement);
         });
 
-        // Initialize Swiper
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
+        // Initialize Masonry layout for the gallery
+        const msnry = new Masonry(gallery, {
+            itemSelector: 'img',
+            columnWidth: '.photo-gallery',
+            percentPosition: true,
+            transitionDuration: '0.5s',
         });
+
+        // Modal functions
+        function showModal(imageAlt) 
+        {
+            const modal = document.getElementById("photoModal");
+            const whatsappLink = document.getElementById("whatsappLink");
+
+            // Set the default WhatsApp message with the alt text (XXX)
+            const message = `Hi, I'd like to order the "${imageAlt}" image`;
+            whatsappLink.href = `https://wa.me/972546436246?text=${encodeURIComponent(message)}`;
+
+            modal.style.display = "flex";
+        }
+
+        function closeModal() 
+        {
+            const modal = document.getElementById("photoModal");
+            modal.style.display = "none";
+        }
     </script>
+
 </body>
+
 </html>
